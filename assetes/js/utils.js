@@ -4,15 +4,15 @@ function handleImgLoad(elemParent) {
   };
 }
 
-function stringToColour(str='') {
+function stringToColour(str = "") {
   let hash = 0;
-  str.split('').forEach((char) => {
+  str.split("").forEach((char) => {
     hash = char.charCodeAt(0) + ((hash << 5) - hash);
   });
-  let colour = '#';
+  let colour = "#";
   for (let i = 0; i < 3; i++) {
     const value = (hash >> (i * 8)) & 0xff;
-    colour += value.toString(16).padStart(2, '0');
+    colour += value.toString(16).padStart(2, "0");
   }
   return colour;
 }
@@ -24,7 +24,7 @@ function stringToColour(str='') {
  * @returns {element}
  */
 function createElement(
-  tag = 'div',
+  tag = "div",
   { classNames, attributes, styles, events } = {},
   ...children //rest
 ) {
@@ -48,7 +48,22 @@ function createElement(
     }
   }
   if (children) {
-    elem.append(...children);//spred
-  } 
+    elem.append(...children); //spred
+  }
   return elem;
+}
+
+function createInitials(value) {
+  if (value) {
+    const names = value.split(" ");
+    const firstName = names[0];
+    const lastName = names[names.length - 1];
+    function getInitials(firstName, lastName) {
+      const firstInitial = firstName.charAt(0).toUpperCase();
+      const lastInitial = lastName.charAt(0).toUpperCase();
+      return `${firstInitial}.${lastInitial}.`;
+    }
+
+    console.log(getInitials(firstName, lastName));
+  }
 }
